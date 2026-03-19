@@ -1031,10 +1031,17 @@ select.inp option{background:var(--s2)}
     <!-- ELENCO -->
     <div class="screen" id="screen-squad">
       <div class="page-title">👕 Elenco & Campo</div>
+
+      <!-- FORMAÇÃO -->
       <div class="card">
-        <div class="card-title"><span class="dot"></span>FORMAÇÃO 4-3-3</div>
+        <div class="card-title" id="squad-form-title"><span class="dot"></span>FORMAÇÃO: 4-3-3</div>
+        <!-- Seletor de formações -->
+        <div id="squad-form-selector" style="display:flex;flex-wrap:wrap;gap:5px;margin-bottom:10px;"></div>
+        <!-- Campo tático SVG -->
         <div class="campo" id="campo"></div>
       </div>
+
+      <!-- JOGADORES -->
       <div class="card">
         <div class="card-title"><span class="dot"></span>TODOS OS JOGADORES</div>
         <div id="squad-list"></div>
@@ -1279,6 +1286,7 @@ select.inp option{background:var(--s2)}
 <script src="./players.js"></script>
 <script src="./fixes.js"></script>
 <script src="./teamhub.js"></script>
+<script src="./squad.js"></script>
 <script src="./team.js"></script>
 
 <script>
