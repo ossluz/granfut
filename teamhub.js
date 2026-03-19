@@ -125,21 +125,7 @@ const FORMATION_LINES = {
   '4-1-4-1': [ ['ATA'], ['MEI','MEI','MEI','MEI'], ['VOL'], ['LAT','ZAG','ZAG','LAT'], ['GOL'] ],
 };
 
-(function patchCampo() {
-  function tryPatch() {
-    const orig = window.renderSquad;
-    if (!orig) { setTimeout(tryPatch, 150); return; }
-
-    window.renderSquad = function() {
-      if (!G) { orig(); return; }
-      _renderCampoFormation();       // Campo com formação correta
-      _renderSquadList();            // Lista de jogadores
-      // Deixa interval.js/players.js injetarem formação e cliques
-    };
-    console.log('[teamhub] ✓ renderSquad com campo dinâmico.');
-  }
-  tryPatch();
-})();
+// patchCampo DESATIVADO: squad.js é o responsável pelo screen-squad
 
 function _renderCampoFormation() {
   const campo = document.getElementById('campo');

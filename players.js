@@ -30,19 +30,8 @@ const STAT_CFG = [
 const STAT_KEYS = STAT_CFG.map(s => s.key);
 
 // ────────────────────────────────────────────────────
-// PATCH — renderSquad
-// ────────────────────────────────────────────────────
-(function patchRenderSquad() {
-  const orig = window.renderSquad;
-  if (!orig) { setTimeout(patchRenderSquad, 100); return; }
-
-  window.renderSquad = function() {
-    orig();
-    if (!G) return;
-    _injectFormationSelector();
-    _makePlayersClickable();
-  };
-})();
+// PATCH renderSquad — DESATIVADO: squad.js é o responsável
+// players.js apenas expõe openPlayerModal e applyPlayerPack
 
 // ────────────────────────────────────────────────────
 // PATCH — renderTransfer (botão editar orçamento)
