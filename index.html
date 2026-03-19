@@ -686,6 +686,97 @@ select.inp option{background:var(--s2)}
 .si-price.common{color:var(--green)}
 .si-price.gran{color:var(--gold)}
 
+/* ══ INTERVAL & PAUSE PANEL ════════════════════ */
+.interval-panel,
+.pause-panel {
+  position:absolute;inset:0;
+  background:rgba(6,11,16,.97);
+  backdrop-filter:blur(4px);
+  display:flex;flex-direction:column;
+  z-index:20;
+  animation:ni .25s ease;
+}
+.ip-header {
+  background:linear-gradient(160deg,#0e2236 0%,#091829 100%);
+  border-bottom:1px solid var(--b1);
+  padding:14px 16px 12px;
+  text-align:center;
+  flex-shrink:0;
+}
+.ip-title {
+  font-family:var(--fd);font-size:1.1rem;letter-spacing:4px;
+  color:var(--gold);margin-bottom:6px;
+}
+.ip-tabs {
+  display:flex;
+  background:var(--s1);
+  border-bottom:1px solid var(--b1);
+  flex-shrink:0;
+}
+.itab,.ptab {
+  flex:1;padding:10px 4px;
+  background:none;border:none;
+  color:var(--t3);font-family:var(--fb);
+  font-size:.67rem;font-weight:700;
+  cursor:pointer;transition:all .15s;
+  border-bottom:2px solid transparent;
+  text-transform:uppercase;letter-spacing:.5px;
+}
+.itab.active,.ptab.active {
+  color:var(--green);
+  border-bottom-color:var(--green);
+  background:rgba(0,232,122,.05);
+}
+.ip-content {
+  flex:1;overflow-y:auto;
+  -webkit-overflow-scrolling:touch;
+  padding:12px 14px;
+}
+.ip-footer {
+  padding:10px 14px;
+  background:var(--s1);
+  border-top:1px solid var(--b1);
+  flex-shrink:0;
+}
+.iv-guide {
+  background:var(--s2);border-left:3px solid var(--green);
+  border-radius:var(--rs);padding:10px 13px;
+  font-size:.83rem;font-weight:600;line-height:1.5;
+  margin-bottom:10px;
+}
+.iv-alerts{display:flex;flex-direction:column;gap:6px}
+.iv-alert{padding:7px 12px;border-radius:var(--rx);font-size:.8rem;font-weight:600}
+.iv-alert.green {background:var(--gdim);color:var(--green)}
+.iv-alert.yellow{background:rgba(255,193,7,.1);color:var(--gold)}
+.iv-alert.orange{background:rgba(255,120,0,.1);color:#ff8c00}
+.iv-alert.red   {background:var(--rdim);color:var(--red)}
+.iv-stat{background:var(--s2);border:1px solid var(--b1);border-radius:var(--rx);padding:6px 12px;font-family:var(--fd);font-size:.95rem;display:flex;align-items:center;gap:5px;flex:1}
+.iv-shop-item{display:flex;align-items:center;gap:10px;background:var(--s2);border:1px solid var(--b1);border-radius:var(--rs);padding:10px 12px;margin-bottom:7px}
+.iv-shop-icon{font-size:1.5rem;flex-shrink:0}
+.iv-shop-body{flex:1}
+.iv-shop-name{font-weight:700;font-size:.85rem;margin-bottom:2px}
+.iv-shop-desc{font-size:.72rem;color:var(--t2);line-height:1.35}
+.iv-section-title{font-family:var(--fd);font-size:.9rem;letter-spacing:2px;color:var(--t2);margin-bottom:8px;text-transform:uppercase;display:flex;align-items:center;gap:6px}
+.iv-section-title::before{content:'';width:5px;height:5px;border-radius:50%;background:var(--green);box-shadow:0 0 6px var(--gglow);display:inline-block}
+.iv-formations{display:grid;grid-template-columns:repeat(4,1fr);gap:6px}
+.iv-formation{background:var(--s2);border:2px solid var(--b1);border-radius:var(--rx);padding:8px 4px;text-align:center;cursor:pointer;transition:all .15s}
+.iv-formation:active{transform:scale(.95)}
+.iv-formation.active{border-color:var(--green);background:var(--gdim)}
+.iv-form-name{font-family:var(--fd);font-size:.95rem;color:var(--t1)}
+.iv-form-desc{font-size:.58rem;color:var(--t3);margin-top:2px;line-height:1.2}
+.iv-formation.active .iv-form-name{color:var(--green)}
+.iv-tactics{display:flex;flex-direction:column;gap:6px}
+.iv-tactic{display:flex;align-items:center;gap:10px;background:var(--s2);border:2px solid var(--b1);border-radius:var(--rx);padding:9px 12px;cursor:pointer;transition:all .15s}
+.iv-tactic:active{transform:scale(.98)}
+.iv-tactic.active{border-color:var(--blue);background:var(--bdim)}
+.iv-tac-icon{font-size:1.2rem;flex-shrink:0}
+.iv-tac-name{font-weight:700;font-size:.85rem;min-width:100px}
+.iv-tac-desc{font-size:.72rem;color:var(--t2)}
+.iv-tactic.active .iv-tac-name{color:var(--blue)}
+.iv-sub-card{display:flex;align-items:center;justify-content:space-between;gap:8px;background:var(--s2);border:1px solid var(--b1);border-radius:var(--rs);padding:9px 11px;margin-bottom:6px}
+.iv-sub-info{display:flex;align-items:center;gap:8px;flex:1}
+.iv-sub-selected{border-color:var(--red)!important;background:var(--rdim)!important}
+
 .shield{display:inline-block}
 
 /* ══ ONBOARDING ══════════════════════════ */
@@ -1117,19 +1208,46 @@ select.inp option{background:var(--s2)}
     </div>
   </div>
   <div class="narration-box" id="narration-box"></div>
+  <!-- ══ INTERVAL PANEL (full tabbed) ══ -->
   <div class="interval-panel" id="interval-panel" style="display:none;">
-    <h2>INTERVALO</h2>
-    <div class="score-num text-gold font-d" id="interval-score">0 – 0</div>
-    <p class="guide-msg" id="interval-guide"></p>
-    <div class="btn-row" style="justify-content:center;">
-      <button class="btn btn-primary" onclick="resumeSecondHalf()">▶ Iniciar 2° Tempo</button>
-      <button class="btn btn-secondary" onclick="goTo('shop'); closeMatchScreen()">🛒 Loja de Intervalo</button>
+    <div class="ip-header">
+      <div class="ip-title">⏱ INTERVALO</div>
+      <div class="score-num" id="interval-score" style="font-size:2rem;letter-spacing:6px">0 – 0</div>
+    </div>
+    <div class="ip-tabs">
+      <button class="itab active" data-tab="vestiario" onclick="switchIntervalTab('vestiario')">🗣️ Vestiário</button>
+      <button class="itab" data-tab="loja"      onclick="switchIntervalTab('loja')">🛒 Loja</button>
+      <button class="itab" data-tab="taticas"   onclick="switchIntervalTab('taticas')">📋 Táticas</button>
+      <button class="itab" data-tab="subs"      onclick="switchIntervalTab('subs')">🔄 Subs</button>
+    </div>
+    <div class="ip-content" id="interval-content"></div>
+    <div class="ip-footer">
+      <button class="btn btn-primary btn-full" onclick="resumeSecondHalf()">▶ Iniciar 2° Tempo</button>
     </div>
   </div>
+
+  <!-- ══ PAUSE PANEL (mid-match) ══ -->
+  <div class="pause-panel" id="pause-panel" style="display:none;">
+    <div class="ip-header" style="background:rgba(8,17,26,.98)">
+      <div class="ip-title">⏸ JOGO PAUSADO</div>
+      <div style="font-size:.8rem;color:var(--t2)">Faça ajustes e retome quando quiser</div>
+    </div>
+    <div class="ip-tabs">
+      <button class="ptab active" data-tab="subs"    onclick="switchPauseTab('subs')">🔄 Substituições</button>
+      <button class="ptab" data-tab="taticas" onclick="switchPauseTab('taticas')">📋 Táticas</button>
+      <button class="ptab" data-tab="loja"    onclick="switchPauseTab('loja')">🛒 Loja</button>
+    </div>
+    <div class="ip-content" id="pause-content"></div>
+    <div class="ip-footer">
+      <button class="btn btn-primary btn-full" onclick="resumeFromPause()">▶ Continuar Jogo</button>
+    </div>
+  </div>
+
   <div class="match-controls">
     <button class="btn btn-secondary btn-sm" onclick="closeMatchScreen()">✕ Sair</button>
-    <button class="btn btn-ghost btn-sm" onclick="setMatchSpeed('NORMAL')" id="btn-normal">1× Normal</button>
-    <button class="btn btn-ghost btn-sm" onclick="setMatchSpeed('FAST')" id="btn-fast">4× Rápido</button>
+    <button class="btn btn-ghost btn-sm" id="btn-pause" onclick="togglePauseMatch()">⏸ Pausar</button>
+    <button class="btn btn-ghost btn-sm" onclick="setMatchSpeed('NORMAL')" id="btn-normal">1×</button>
+    <button class="btn btn-ghost btn-sm" onclick="setMatchSpeed('FAST')" id="btn-fast">4×</button>
     <span class="speed-indicator" id="speed-indicator">1× NORMAL</span>
   </div>
 </div>
@@ -1154,6 +1272,7 @@ select.inp option{background:var(--s2)}
 <script src="./finance.js"></script>
 <script src="./missions.js"></script>
 <script src="./app.js"></script>
+<script src="./interval.js"></script>
 
 <script>
   window.upgradeAvailable = false;
