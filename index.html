@@ -1,0 +1,551 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="theme-color" content="#00e87a">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="GranFut">
+  <meta name="description" content="O simulador de futebol brasileiro definitivo. Por Saieso Seraos.">
+
+  <title>GranFut Manager · Saieso Seraos</title>
+  <link rel="manifest" href="./manifest.json">
+  <link rel="icon" href="./assets/icons/icon-192.png" type="image/png">
+  <link rel="apple-touch-icon" href="./assets/icons/icon-192.png">
+  <link rel="stylesheet" href="./css/style.css">
+</head>
+<body>
+
+<!-- ══════════════════════════════════════════════════
+     ONBOARDING — Criação de carreira
+     ══════════════════════════════════════════════════ -->
+<div id="onboarding">
+  <div class="ob-logo">GRAN<em>FUT</em></div>
+  <p class="ob-sub">O simulador de futebol brasileiro definitivo<br>por <strong>Saieso Seraos</strong></p>
+
+  <!-- Passo 0: Escolha o modo -->
+  <div class="ob-step active">
+    <div class="ob-input-group">
+      <span class="ob-label">ESCOLHA SEU MODO DE JOGO</span>
+      <div class="ob-modes">
+        <div class="mode-card ob-mode-btn active" data-mode="solo">
+          <span class="mc-icon">⭐</span>
+          <span class="mc-name">SOLO</span>
+          <small style="font-size:0.62rem;color:var(--text2);display:block;margin-top:4px;">Você é o jogador</small>
+        </div>
+        <div class="mode-card ob-mode-btn" data-mode="manager">
+          <span class="mc-icon">⚙️</span>
+          <span class="mc-name">MANAGER</span>
+          <small style="font-size:0.62rem;color:var(--text2);display:block;margin-top:4px;">Técnico do time</small>
+        </div>
+        <div class="mode-card ob-mode-btn" data-mode="tycoon">
+          <span class="mc-icon">🏢</span>
+          <span class="mc-name">TYCOON</span>
+          <small style="font-size:0.62rem;color:var(--text2);display:block;margin-top:4px;">Dono do clube</small>
+        </div>
+      </div>
+    </div>
+    <div class="card" style="background:var(--surface2);border-color:var(--border);">
+      <p class="fs08 text-muted">
+        🎯 <strong>Solo:</strong> Controle seu jogador, receba propostas e evolua até o topo.<br>
+        ⚙️ <strong>Manager:</strong> Monte um time, tome decisões táticas e suba divisões.<br>
+        🏢 <strong>Tycoon:</strong> Gerencie finanças, estádio, base e compre clubes.
+      </p>
+    </div>
+  </div>
+
+  <!-- Passo 1: Nome do manager/jogador -->
+  <div class="ob-step">
+    <div class="ob-input-group">
+      <label class="ob-label" for="ob-mname">SEU NOME</label>
+      <input class="inp" id="ob-mname" type="text" placeholder="Ex: Saieso Seraos" maxlength="30">
+    </div>
+    <div class="ob-input-group">
+      <label class="ob-label">GÊNERO</label>
+      <select class="inp">
+        <option value="M">Masculino</option>
+        <option value="F">Feminino</option>
+      </select>
+    </div>
+  </div>
+
+  <!-- Passo 2: Nome do clube e estado -->
+  <div class="ob-step">
+    <div class="ob-input-group">
+      <label class="ob-label" for="ob-cname">NOME DO SEU CLUBE</label>
+      <input class="inp" id="ob-cname" type="text" placeholder="Ex: SERAOS FC" maxlength="30">
+    </div>
+    <div class="ob-input-group">
+      <label class="ob-label" for="ob-state">ESTADO</label>
+      <select class="inp" id="ob-state">
+        <option value="SP">São Paulo</option>
+        <option value="RJ">Rio de Janeiro</option>
+        <option value="MG">Minas Gerais</option>
+        <option value="BA">Bahia</option>
+        <option value="PR">Paraná</option>
+        <option value="RS">Rio Grande do Sul</option>
+        <option value="CE">Ceará</option>
+        <option value="PE">Pernambuco</option>
+        <option value="GO">Goiás</option>
+        <option value="PA">Pará</option>
+        <option value="AM">Amazonas</option>
+        <option value="MA">Maranhão</option>
+        <option value="SC">Santa Catarina</option>
+        <option value="MT">Mato Grosso</option>
+        <option value="MS">Mato Grosso do Sul</option>
+        <option value="ES">Espírito Santo</option>
+        <option value="RN">Rio Grande do Norte</option>
+        <option value="PI">Piauí</option>
+        <option value="AL">Alagoas</option>
+        <option value="PB">Paraíba</option>
+        <option value="SE">Sergipe</option>
+        <option value="RO">Rondônia</option>
+        <option value="TO">Tocantins</option>
+        <option value="AC">Acre</option>
+        <option value="AP">Amapá</option>
+        <option value="RR">Roraima</option>
+        <option value="DF">Distrito Federal</option>
+      </select>
+    </div>
+    <div class="card" style="background:var(--surface2);border-color:var(--border);">
+      <p class="fs08 text-muted">
+        Você começa na <strong class="text-green">Série G (Local)</strong> — o nível mais baixo.<br>
+        Ganhe títulos ou contribua voluntariamente para subir mais rápido!
+      </p>
+    </div>
+  </div>
+
+  <!-- Controles -->
+  <div style="display:flex;gap:10px;margin-top:20px;">
+    <button id="ob-prev" class="btn btn-secondary" style="display:none;flex:1">← Voltar</button>
+    <button id="ob-next" class="btn btn-primary" style="flex:1">Próximo →</button>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════
+     APP PRINCIPAL
+     ══════════════════════════════════════════════════ -->
+<div id="app">
+
+  <!-- ── Header ── -->
+  <header class="app-header">
+    <div class="logo">GRAN<em>FUT</em></div>
+    <div class="header-pills">
+      <div class="pill">🏟️ <span id="hdr-club" class="pv">—</span></div>
+      <div class="pill">💰 <span id="hdr-cash" class="pv g">R$ 0</span></div>
+      <div class="pill">◈ <span id="hdr-granfut" class="pv g">0</span></div>
+      <div class="pill">📅 <span id="hdr-season" class="pv">T1·R1</span></div>
+      <div class="pill" id="hdr-mode-pill">⭐ <span id="hdr-mode" class="pv">—</span></div>
+    </div>
+  </header>
+
+  <!-- ── Scroll Area ── -->
+  <div class="main-scroll" id="main-scroll">
+
+    <!-- ═══ SCREEN: HOME ═══ -->
+    <div class="screen active" id="screen-home">
+      <div class="guide-banner">
+        <div class="guide-icon">📊</div>
+        <div class="guide-text">
+          <small>Guia Estratégico · GranFut</small>
+          <p id="guide-msg">Bem-vindo ao GranFut! Simule uma partida para começar.</p>
+        </div>
+      </div>
+
+      <div class="stat-row">
+        <div class="stat-block">
+          <label>Posição</label>
+          <div class="val g font-d" id="home-pos">—</div>
+        </div>
+        <div class="stat-block">
+          <label>Pontos</label>
+          <div class="val font-d" id="home-pts">0</div>
+        </div>
+        <div class="stat-block">
+          <label>Aproveit.</label>
+          <div class="val font-d" id="home-aprov">0%</div>
+        </div>
+      </div>
+
+      <div class="stat-row stat-row-2">
+        <div class="stat-block">
+          <label>OVR médio</label>
+          <div class="val font-d" id="home-ovr">—</div>
+        </div>
+        <div class="stat-block">
+          <label>Moral</label>
+          <div class="val font-d" id="home-moral">70</div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-title"><span class="dot"></span>FINANÇAS SEMANAIS</div>
+        <div class="row"><label>Folha salarial</label><span id="home-wages" class="text-red">—</span></div>
+        <div class="row"><label>Orçamento transferências</label><span id="home-budget" class="text-blue">—</span></div>
+        <div class="row"><label>Patrocínios</label><span id="home-sponsors" class="text-green">—</span></div>
+        <div class="row" style="border:0;">
+          <label>Moral do elenco</label>
+          <div class="flex gap8" style="flex:1;justify-content:flex-end">
+            <div class="bar-wrap"><div class="bar-fill" id="home-moral-bar" style="width:70%"></div></div>
+            <span id="home-moral-pct">70</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-title"><span class="dot gold"></span>PRÓXIMO ADVERSÁRIO</div>
+        <div style="display:flex;align-items:center;justify-content:space-around;padding:10px 0;">
+          <div style="text-align:center">
+            <div id="match-home-shield" style="margin-bottom:6px;"></div>
+            <div class="font-d fs08" id="match-home-name">—</div>
+            <small class="text-muted">CASA</small>
+          </div>
+          <div class="font-d text-gold" style="font-size:1.4rem;letter-spacing:4px;">VS</div>
+          <div style="text-align:center">
+            <div id="home-opp-shield" style="margin-bottom:6px;"></div>
+            <div class="font-d fs08" id="home-opp">—</div>
+            <small class="text-muted">FORA</small>
+          </div>
+        </div>
+        <button class="btn btn-primary btn-full" onclick="openMatchScreen()">⚽ Simular Partida</button>
+      </div>
+    </div>
+
+    <!-- ═══ SCREEN: ELENCO ═══ -->
+    <div class="screen" id="screen-squad">
+      <div class="page-title">👕 Elenco & Campo</div>
+      <div class="card">
+        <div class="card-title"><span class="dot"></span>FORMAÇÃO 4-3-3</div>
+        <div class="campo" id="campo"></div>
+      </div>
+      <div class="card">
+        <div class="card-title"><span class="dot"></span>TODOS OS JOGADORES</div>
+        <div id="squad-list"></div>
+      </div>
+    </div>
+
+    <!-- ═══ SCREEN: PARTIDA ═══ -->
+    <div class="screen" id="screen-match">
+      <div class="page-title">⚽ Partidas</div>
+      <div class="card accent">
+        <div class="card-title"><span class="dot"></span>PRÉ-JOGO</div>
+        <div style="display:flex;align-items:center;justify-content:space-around;padding:8px 0;">
+          <div style="text-align:center">
+            <div id="match-home-shield" style="margin-bottom:6px;"></div>
+            <div class="font-d fs08" id="match-home-name">—</div>
+          </div>
+          <div class="font-d text-gold" style="font-size:1.3rem;letter-spacing:3px;">VS</div>
+          <div style="text-align:center">
+            <div id="match-away-shield" style="margin-bottom:6px;"></div>
+            <div class="font-d fs08" id="match-away-name">—</div>
+            <small class="text-muted" id="match-opp-power"></small>
+          </div>
+        </div>
+        <div class="guide-banner" style="margin-bottom:10px;">
+          <div class="guide-icon">💡</div>
+          <div class="guide-text"><p id="match-preguide" class="fs08">Carregando análise...</p></div>
+        </div>
+        <button class="btn btn-primary btn-full" onclick="openMatchScreen()">⚽ Jogar Agora</button>
+      </div>
+
+      <div class="card">
+        <div class="card-title"><span class="dot gold"></span>HISTÓRICO</div>
+        <div id="result-history">
+          <div class="empty">Nenhuma partida disputada ainda.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══ SCREEN: CAMPEONATO ═══ -->
+    <div class="screen" id="screen-league">
+      <div class="page-title">🏆 Campeonato</div>
+      <div class="card">
+        <table class="table-liga">
+          <thead>
+            <tr>
+              <th>#</th><th>Clube</th><th>PJ</th><th>PTS</th>
+              <th>GP</th><th>GC</th><th>SG</th><th>Forma</th>
+            </tr>
+          </thead>
+          <tbody id="table-body"></tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- ═══ SCREEN: TRANSFERÊNCIAS ═══ -->
+    <div class="screen" id="screen-transfer">
+      <div class="page-title">🔄 Transferências</div>
+      <div class="stat-row stat-row-2" style="margin-bottom:12px">
+        <div class="stat-block">
+          <label>Orçamento</label>
+          <div class="val b font-d" id="t-budget">R$ 0</div>
+        </div>
+        <div class="stat-block">
+          <label>No elenco</label>
+          <div class="val font-d" id="t-squad-count">0</div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-title"><span class="dot"></span>MERCADO</div>
+        <div id="market-list"></div>
+        <div class="btn-row">
+          <button class="btn btn-secondary btn-sm" onclick="refreshMarket()">🔄 Atualizar mercado</button>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-title"><span class="dot red"></span>SEUS JOGADORES À VENDA</div>
+        <div id="for-sale-list"></div>
+      </div>
+    </div>
+
+    <!-- ═══ SCREEN: TREINO ═══ -->
+    <div class="screen" id="screen-training">
+      <div class="page-title">🏋️ Treinamento</div>
+      <div class="card accent" id="training-status">
+        <div class="card-title"><span class="dot"></span>STATUS DO TREINO</div>
+        <div class="row">
+          <label>Jogos sem treinar</label>
+          <span class="font-d text-gold" id="training-games">0</span>
+        </div>
+        <div class="row" style="border:0;">
+          <label>Status</label>
+          <span id="training-urgency" class="text-green fw700">✅ Treino em dia</span>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-title"><span class="dot gold"></span>ENERGIA MÉDIA DO ELENCO</div>
+        <div class="row" style="border:0;">
+          <div class="bar-wrap"><div class="bar-fill" id="team-energy-bar" style="width:70%"></div></div>
+          <span id="team-energy-avg">70</span>%
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-title"><span class="dot"></span>SESSÕES DE TREINO</div>
+        <div class="btn-row">
+          <button class="btn btn-primary" onclick="doTraining('MANDATORY')">
+            ✅ Treino Obrigatório
+          </button>
+          <button class="btn btn-secondary" onclick="doTraining('OPTIONAL')">
+            ⚡ Treino Extra (+XP, -Energia)
+          </button>
+        </div>
+        <p class="fs08 text-muted" style="margin-top:10px;">
+          ⚠️ Treino obrigatório a cada 2 jogos. Ignorar gera regressão de 5% nos atributos físicos.
+        </p>
+      </div>
+
+      <div class="card">
+        <div class="card-title"><span class="dot gold"></span>INFRAESTRUTURA (GranFut)</div>
+        <div class="row">
+          <label>Centro de Treinamento</label>
+          <div class="flex gap8">
+            <span class="badge badge-blue" id="ct-level">Nível 1</span>
+            <button class="btn btn-xs btn-secondary" onclick="upgradeFacility('ct')">↑ Melhorar</button>
+          </div>
+        </div>
+        <div class="row">
+          <label>Estádio</label>
+          <div class="flex gap8">
+            <span class="badge badge-green" id="stadium-level">Nível 1</span>
+            <button class="btn btn-xs btn-secondary" onclick="upgradeFacility('stadium')">↑ Melhorar</button>
+          </div>
+        </div>
+        <div class="row" style="border:0;">
+          <label>Marketing</label>
+          <div class="flex gap8">
+            <span class="badge badge-gold" id="marketing-level">Nível 1</span>
+            <button class="btn btn-xs btn-secondary" onclick="upgradeFacility('marketing')">↑ Melhorar</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══ SCREEN: LOJA ═══ -->
+    <div class="screen" id="screen-shop">
+      <div class="page-title">🛒 Loja GranFut</div>
+      <div class="stat-row stat-row-2" style="margin-bottom:12px">
+        <div class="stat-block">
+          <label>Saldo</label>
+          <div class="val g font-d" id="shop-cash">R$ 0</div>
+        </div>
+        <div class="stat-block">
+          <label>GranFut</label>
+          <div class="val g font-d" id="shop-gran">◈ 0</div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-title"><span class="dot"></span>ITENS DISPONÍVEIS</div>
+        <div id="shop-items"></div>
+      </div>
+    </div>
+
+    <!-- ═══ SCREEN: MISSÕES ═══ -->
+    <div class="screen" id="screen-missions">
+      <div class="page-title">🎯 Missões</div>
+      <div id="missions-list"></div>
+    </div>
+
+    <!-- ═══ SCREEN: CONFIG ═══ -->
+    <div class="screen" id="screen-config">
+      <div class="page-title">⚙️ Configurações</div>
+      <div id="config-content"></div>
+    </div>
+
+  </div><!-- /main-scroll -->
+
+  <!-- ── Bottom Nav ── -->
+  <nav class="bottom-nav">
+    <button class="nav-item active" data-screen="home"><span class="ni">🏠</span>Home</button>
+    <button class="nav-item" data-screen="squad"><span class="ni">👕</span>Elenco</button>
+    <button class="nav-item" data-screen="match"><span class="ni">⚽</span>Partida</button>
+    <button class="nav-item" data-screen="league"><span class="ni">🏆</span>Liga</button>
+    <button class="nav-item" data-screen="transfer"><span class="ni">🔄</span>Mercado</button>
+    <button class="nav-item" data-screen="training"><span class="ni">🏋️</span>Treino</button>
+    <button class="nav-item" data-screen="shop"><span class="ni">🛒</span>Loja</button>
+    <button class="nav-item" data-screen="missions"><span class="ni">🎯</span>Missões</button>
+    <button class="nav-item" data-screen="config"><span class="ni">⚙️</span>Config</button>
+  </nav>
+
+</div><!-- /app -->
+
+<!-- ══════════════════════════════════════════════════
+     TELA DE PARTIDA (fullscreen overlay)
+     ══════════════════════════════════════════════════ -->
+<div id="match-screen" class="match-screen-wrapper">
+
+  <!-- Ticker de notícias reais -->
+  <div class="news-ticker">
+    <div class="ticker-inner" id="ticker-text">
+      ⚽ GranFut · Notícias do mundo do futebol carregando... · ⚽
+    </div>
+  </div>
+
+  <!-- Placar -->
+  <div class="scoreboard">
+    <div class="score-teams">
+      <div class="score-team">
+        <div id="ms-home-shield"></div>
+        <div class="tname" id="ms-home">—</div>
+      </div>
+      <div class="score-center">
+        <div class="score-num" id="ms-score">0 – 0</div>
+        <div class="score-time" id="ms-time">0' 1° Tempo</div>
+      </div>
+      <div class="score-team">
+        <div id="ms-away-shield"></div>
+        <div class="tname" id="ms-away">—</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Narração -->
+  <div class="narration-box" id="narration-box"></div>
+
+  <!-- Painel de intervalo -->
+  <div class="interval-panel" id="interval-panel" style="display:none;">
+    <h2>INTERVALO</h2>
+    <div class="score-num text-gold font-d" id="interval-score">0 – 0</div>
+    <p class="guide-msg" id="interval-guide"></p>
+    <div class="btn-row" style="justify-content:center;">
+      <button class="btn btn-primary" onclick="resumeSecondHalf()">▶ Iniciar 2° Tempo</button>
+      <button class="btn btn-secondary" onclick="goTo('shop'); closeMatchScreen()">🛒 Loja de Intervalo</button>
+    </div>
+  </div>
+
+  <!-- Controles -->
+  <div class="match-controls">
+    <button class="btn btn-secondary btn-sm" onclick="closeMatchScreen()">✕ Sair</button>
+    <button class="btn btn-ghost btn-sm" onclick="setMatchSpeed('NORMAL')" id="btn-normal">1× Normal</button>
+    <button class="btn btn-ghost btn-sm" onclick="setMatchSpeed('FAST')"   id="btn-fast">4× Rápido</button>
+    <span class="speed-indicator" id="speed-indicator">1× NORMAL</span>
+  </div>
+
+</div>
+
+<!-- ══════════════════════════════════════════════════
+     MODO MESTRE — SAIESO SERAOS
+     ══════════════════════════════════════════════════ -->
+<div id="master-panel">
+  <div class="master-header">━━━━━━━━━━━━━━━━━━━━━━━━</div>
+  <div class="master-title">SISTEMA MESTRE<br>SAIESO SERAOS</div>
+  <div class="master-log" id="master-log"></div>
+  <div class="master-input-row">
+    <input id="master-input" type="password" placeholder="Senha / Comando...">
+    <button class="btn btn-primary btn-sm" onclick="masterSubmit()">▶</button>
+    <button class="btn btn-ghost btn-sm" onclick="closeMaster()">✕</button>
+  </div>
+</div>
+
+<!-- TOAST -->
+<div id="toast"></div>
+
+<!-- Scripts (ordem importa) -->
+<script src="./js/data.js"></script>
+<script src="./js/engine.js"></script>
+<script src="./js/finance.js"></script>
+<script src="./js/missions.js"></script>
+<script src="./js/app.js"></script>
+
+<!-- Helpers adicionais inline -->
+<script>
+  // Upgrade de instalação
+  window.upgradeAvailable = false;
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.ready.then(reg => {
+      reg.addEventListener('updatefound', () => {
+        reg.installing?.addEventListener('statechange', function() {
+          if (this.state === 'installed' && navigator.serviceWorker.controller) {
+            window.upgradeAvailable = true;
+          }
+        });
+      });
+    });
+  }
+
+  // Refresh de mercado
+  window.refreshMarket = function() {
+    if (!G) return;
+    G.market = GranFutData.generateMarket(G.team.division, 6);
+    renderTransfer();
+    toast('Mercado atualizado!');
+    saveGame();
+  };
+
+  // Upgrade de infraestrutura (UI)
+  window.upgradeFacility = function(key) {
+    if (!G) return;
+    const fin = new GranFutFinance.FinanceSystem(G.team);
+    const result = fin.upgradeFacility(key, G.userProfile);
+    if (!result.success) { toast(result.reason, 'var(--red)'); return; }
+    toast(`${key} melhorado para Nível ${result.newLevel}! ${result.upgrade.bonus}`, 'var(--gold)');
+    const el = document.getElementById(`${key}-level`);
+    if (el) el.textContent = `Nível ${result.newLevel}`;
+    renderHeader();
+    saveGame();
+  };
+
+  // Sponsor sign (simplificado do config screen)
+  window.signSponsor = function() {
+    if (!G) return;
+    const sponsor = GranFutFinance.generateSponsor(G.team.division);
+    const fin = new GranFutFinance.FinanceSystem(G.team);
+    const res = fin.signSponsor(sponsor);
+    G.sponsors.push(sponsor);
+    toast(`Patrocínio: ${sponsor.name} — R$ ${sponsor.value.toLocaleString('pt-BR')}/sem!`, 'var(--gold)');
+    renderHeader();
+    saveGame();
+  };
+
+  // Solo mode guard
+  window.requireSolo = function(fn) {
+    if (!G || G.userProfile.mode !== 'solo') {
+      toast('Esta ação é exclusiva do Modo Solo.', 'var(--red)');
+      return;
+    }
+    fn();
+  };
+</script>
+
+</body>
+</html>
